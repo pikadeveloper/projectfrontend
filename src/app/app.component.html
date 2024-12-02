@@ -1,0 +1,42 @@
+<!-- <mat-toolbar class="nav">
+  <div class="mobile-menu">
+    <button mat-icon-button (click)="toggleMenu()" class="menu-icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img class="logo" src="assets/img/logo.png" (click)="navegar('inicio')" alt="logo" width="50px">
+    <span class="montserrat title" (click)="navegar('inicio')">ConectaTalentoIT</span>
+  </div>
+
+  <div class="nav-items" [class.show-menu]="menuVisible">
+    <button mat-raised-button *ngIf="!logueado()" color="primary" (click)="navegar('login')" class="btninicio">Iniciar Sesión</button>
+    <button mat-raised-button *ngIf="!logueado()" (click)="navegar('registro')">Registrarse</button>
+    <button mat-raised-button class="btn montserrat" *ngIf="logueado()" (click)="navegar('perfil')">Perfil</button>
+    <button mat-raised-button class="btn montserrat" *ngIf="logueado()" (click)="navegar('crear')">Crear Oferta</button>
+    <button mat-raised-button class="btn montserrat" *ngIf="logueado()" color="warn" (click)="salir()">Cerrar Sesión</button>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet> -->
+
+<mat-toolbar class="nav">
+  <div class="mobile-menu">
+    <!-- Botón tipo hamburguesa -->
+    <button mat-icon-button (click)="toggleMenu()" class="menu-icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- Logo -->
+    <img class="logo" src="assets/img/logo.png" (click)="navegar('inicio')" alt="logo" width="50px">
+    <!-- Título -->
+    <span class="title" (click)="navegar('inicio')">ConectaTalentoIT</span>
+  </div>
+
+  <!-- Elementos del menú -->
+  <div class="nav-items" [class.show-menu]="menuVisible">
+    <button mat-raised-button *ngIf="!logueado()" color="primary" (click)="navegar('login')">Iniciar Sesión</button>
+    <button mat-raised-button *ngIf="!logueado()" (click)="navegar('registro')">Registrarse</button>
+    <button mat-raised-button *ngIf="logueado()" (click)="navegar('perfil')">Perfil</button>
+    <button mat-raised-button *ngIf="logueado()" (click)="navegar('crear')">Crear Oferta</button>
+    <button mat-raised-button *ngIf="logueado()" color="warn" (click)="salir()">Cerrar Sesión</button>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
+

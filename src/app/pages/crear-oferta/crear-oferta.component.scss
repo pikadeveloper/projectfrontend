@@ -1,0 +1,42 @@
+.background{
+    width: 100%;
+    height: 100%;
+    background: url('https://c.tenor.com/k2V7yl0m9I0AAAAC/cidade.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+  
+.form-text{
+    color: gainsboro;
+}
+
+
+form {
+    width: 400px;
+    background: #24303c;
+    position: fixed;
+    top: 12%;
+    left: 40%;
+    padding: 30px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: white;
+    box-shadow: 7px 13px 37px #000;
+}
+
+.active-filter-bg {
+    background-color: #ee8844 !important;
+}
+
+.active-filter-text {
+    color: white;
+}
+
+.text-truncate {
+    width: 9vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

@@ -1,0 +1,51 @@
+<div class="background">
+    <form id="box-form">
+        <h2>Creacion de ofertas laborales</h2>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Nombre del trabajo</label>
+            <input type="text" class="form-control" id="exampleInputCargo" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3 descripcion">
+            <label for="exampleInputPassword1" class="form-label">Descripción del trabajo</label>
+            <input type="text" class="form-control descripcion" id="exampleInputCargo" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Categoria de trabajo</label>
+        <mat-expansion-panel class="panel" (opened)="filtroPanelOpenState = true" (closed)="filtroPanelOpenState = false">
+            <mat-expansion-panel-header [ngClass]="{'active-filter-bg': categoriaList.selectedOptions.selected.length > 0}">
+                <mat-panel-title [ngClass]="{'active-filter-text': categoriaList.selectedOptions.selected.length > 0}">
+                    <span>Categorias</span>
+                    <span *ngIf="categoriaList.selectedOptions.selected.length > 0">:</span>
+                </mat-panel-title>
+                <mat-panel-description [ngClass]="{'active-filter-text': categoriaList.selectedOptions.selected.length > 0}"
+                    *ngIf="categoriaList.selectedOptions.selected.length > 0">
+                    <span class="text-truncate">
+                        {{ categoriaList.selectedOptions.selected[0]?.value }}
+                        <span *ngIf="categoriaList.selectedOptions.selected.length > 1">,</span>
+                        {{ categoriaList.selectedOptions.selected[1]?.value }}
+                    </span>
+                    <span *ngIf="categoriaList.selectedOptions.selected.length > 2">
+                        +{{categoriaList.selectedOptions.selected.length - 2}}
+                    </span> 
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-selection-list #categoriaList>
+                <mat-list-option *ngFor="let categorias of categoria" [value]="categorias"> {{categorias}} </mat-list-option>
+            </mat-selection-list>        
+        </mat-expansion-panel>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Ubicación</label>
+            <input type="text" class="form-control" id="exampleInputUbicacion" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Requisitos</label>
+            <input type="text" class="form-control" id="exampleInputCargo" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Salario</label>
+            <input type="number" class="form-control" id="exampleInputRequisitos" aria-describedby="emailHelp">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="registro()">Crear</button>
+    </form>
+</div>

@@ -1,0 +1,113 @@
+.contenedor{
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 7rem 1fr;
+    
+
+}
+
+.cuadro{
+    background-color: rgba(75, 94, 123, 0.7);
+    border: 2px solid rgba(39,41,43,0.3);
+    border-radius: 1%;
+}
+
+
+
+.siderbar{
+    margin-right: 10px;
+}
+
+.card1, .card2, .card3, .card4{
+    margin: 10px;
+    background-color: #181a1b;
+    color: white;
+}
+
+
+.nombre{
+    margin-top: 10px;
+    margin-left: 30%;
+}
+.estudiante{
+    margin-left: 33%;
+}
+
+.titulocard{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 16% 75%;
+}
+
+.no-filter-width {
+    width: 12vw;
+}
+ 
+.active-filter-width {
+    width: 20vw;
+}
+
+.active-filter-bg {
+    background-color: #ee8844 !important;
+}
+ 
+.active-filter-text {
+    color: white;
+}
+
+.text-truncate {
+    width: 9vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panel{
+    margin-bottom: 10px;
+}
+
+.budget-range {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+   
+.budget-range mat-form-field {
+    width: 45%;
+}
+
+.fotoPerfil{
+    margin-top: 10px;
+    margin-left: 22%;
+    margin-right: 50%;
+    width: 50%;
+    height: 200px;
+}
+
+.nombrePrincipal{
+    margin-top: 10px;
+}
+  
+.background{
+    width: 100%;
+    height: 100%;
+    background: url('https://c.tenor.com/k2V7yl0m9I0AAAAC/cidade.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+li{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.descripcion{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
