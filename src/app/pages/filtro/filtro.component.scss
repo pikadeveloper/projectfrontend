@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 7rem 1fr;
-    
+
 
 }
 
@@ -60,7 +60,7 @@ mat-expansion-panel{
 .no-filter-width {
     width: 12vw;
 }
- 
+
 .active-filter-width {
     width: 20vw;
 }
@@ -68,7 +68,7 @@ mat-expansion-panel{
 .active-filter-bg {
     background-color: #ee8844 !important;
 }
- 
+
 .active-filter-text {
     color: white;
 }
@@ -90,7 +90,7 @@ mat-expansion-panel{
     justify-content: space-between;
     margin-top: 20px;
 }
-   
+
 .budget-range mat-form-field {
     width: 45%;
 }
@@ -98,7 +98,7 @@ mat-expansion-panel{
 ::ng-deep .mat-expansion-panel-body {
     background-color: white;
 }
-  
+
 .background{
     width: 100%;
     height: 100%;
@@ -106,4 +106,54 @@ mat-expansion-panel{
     background-size: 100%;
     background-repeat: repeat;
     background-attachment: fixed;
+}
+
+//Filtro busqueda
+
+.filtro-container {
+  padding: 20px;
+
+  .search-box {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+
+    input {
+      width: 100%;
+      padding: 12px 45px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s;
+
+      &:focus {
+        border-color: #0066cc;
+        box-shadow: 0 0 0 2px rgba(0,102,204,0.2);
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+  }
+
+  .resultados-busqueda {
+    margin-top: 20px;
+    padding: 20px;
+
+    h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+  }
 }

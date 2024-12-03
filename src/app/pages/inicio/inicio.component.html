@@ -19,16 +19,28 @@
       <div class="hero-section">
         <h1>Conecta Talento IT</h1>
         <p>La plataforma que une a los mejores profesionales IT con las empresas más innovadoras de América Latina.</p>
-        <button mat-raised-button color="accent" class="cta-button">Explorar Talento</button>
+        <button (click)="navegar('filtro')"  mat-raised-button color="accent" class="cta-button">Explorar Talento</button>
       </div>
 
-      <div class="features-section">
-        <mat-card class="feature-card">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            placeholder="Buscar empleos: Machine Learning, Software Architect, Java..."
+            (keyup.enter)="buscarEmpleos()"
+          >
+        </div>
+      </div>
+
+      <div  class="features-section">
+        <mat-card (click)="navegar('categoria')" class="feature-card">
           <mat-icon>search</mat-icon>
           <h2>Búsqueda Avanzada</h2>
           <p>Encuentra el talento que necesitas con nuestras herramientas inteligentes.</p>
         </mat-card>
-        <mat-card class="feature-card">
+        <mat-card (click)="navegar('filtro')" class="feature-card">
           <mat-icon>work</mat-icon>
           <h2>Oportunidades Laborales</h2>
           <p>Descubre las mejores ofertas de trabajo para profesionales IT.</p>

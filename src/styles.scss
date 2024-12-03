@@ -5,3 +5,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 30px;
+    //background-color: #d0e0eb;
+    background: url('https://www.iloveimg.com/img/bg/background.svg');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}

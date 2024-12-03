@@ -14,10 +14,16 @@ export class InicioComponent {
     this.router.navigate([url]);
   }
 
+
+
   searchTerm: string = '';
 
-  searchCategories() {
-    // Implementa aquí la lógica de búsqueda
-    // Por ejemplo, filtrar un array de categorías basado en searchTerm
+  buscarEmpleos() {
+    // Aquí puedes implementar la lógica de búsqueda
+    console.log('Buscando:', this.searchTerm);
+    // Por ejemplo, podrías navegar al componente de filtro con el término de búsqueda
+    this.router.navigate(['/filtro'], {
+      queryParams: { search: this.searchTerm }
+    });
   }
 }

@@ -1,10 +1,27 @@
-<div class="background">
+<div class="landing-container">
     <div class="contenedor">
         <div class="child"></div>
         <div class="child header">
 
         </div>
         <div class="child siderbar cuadro">
+          <div class="filtro-container">
+            <div class="search-box">
+              <i class="fas fa-search search-icon"></i>
+              <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                placeholder="Buscar empleos: Machine Learning, Software Architect, Java..."
+                (keyup.enter)="realizarBusqueda()"
+              >
+            </div>
+
+            <!-- Aquí puedes agregar más filtros o resultados -->
+            <div class="resultados-busqueda" *ngIf="searchTerm">
+              <h3>Resultados para: "{{searchTerm}}"</h3>
+              <!-- Lista de resultados -->
+            </div>
+          </div>
             <mat-expansion-panel class="panel" (opened)="filtroPanelOpenState = true" (closed)="filtroPanelOpenState = false">
                 <mat-expansion-panel-header [ngClass]="{'active-filter-bg': regionList.selectedOptions.selected.length > 0}">
                     <mat-panel-title [ngClass]="{'active-filter-text': regionList.selectedOptions.selected.length > 0}">
