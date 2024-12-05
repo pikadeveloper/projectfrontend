@@ -26,6 +26,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { CrearOfertaComponent } from './pages/crear-oferta/crear-oferta.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
+import { OfertaFilterComponent } from './pages/ofertafilter/ofertafilter.component';
+import { PostService } from './services/post.service';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
     PerfilComponent,
     CrearOfertaComponent,
     RegistroComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    OfertaFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,9 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
     MatIconModule,
     MatSlideToggleModule,
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

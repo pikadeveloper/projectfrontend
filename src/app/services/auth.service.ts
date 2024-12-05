@@ -31,6 +31,8 @@ export class AuthService {
   }
 
   private encryptData(data: any): string {
+    console.log(data);
+
     return CryptoJS.AES.encrypt(JSON.stringify(data), this.secretKey).toString();
   }
 
@@ -52,13 +54,19 @@ export class AuthService {
   public login = async (email: string, password: string) => {
     try {
       const loginResponse = await lastValueFrom(this.http.post<LoginResponse>(`${this.api}login/`, { email, password }));
-      this._userData = loginResponse;
-      const encryptedData = this.encryptData(loginResponse);
-      localStorage.setItem('userData', encryptedData);
-      this.router.navigateByUrl('inicio');
-      return loginResponse.message;
-    } catch (error) {
-      return 'Usuario o contraseña incorrectos.';
+
+      if (loginResponse) {
+        this._userData = loginResponse.data;
+        const encryptedData = this.encryptData(loginResponse);
+        localStorage.setItem('userData', encryptedData);
+        this.router.navigateByUrl('inicio');
+        return { success: true, message: loginResponse.message };
+      } else {
+        return { success: false, message: 'Respuesta inválida del servidor' };
+      }
+    } catch (error: any) {
+      const errorMessage = error.error?.message || 'Usuario o contraseña incorrectos.';
+      return { success: false, message: errorMessage };
     }
   };
 
@@ -79,6 +87,10 @@ export class AuthService {
 
   public isLoggedIn = (): boolean => {
     return !!this._userData;
+  };
+
+  public isEmployer = (): boolean => {
+    return !!this._userData?.isEmployer;
   };
 }
 

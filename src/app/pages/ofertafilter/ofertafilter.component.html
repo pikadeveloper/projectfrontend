@@ -1,0 +1,24 @@
+<div class="filter-container">
+  <h3>Filtros</h3>
+
+  <label for="categoria">Categoría:</label>
+  <select id="categoria" [(ngModel)]="filtros.categoria">
+    <option value="">Todas</option>
+    <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+  </select>
+
+  <label for="ubicacion">Ubicación:</label>
+  <select id="ubicacion" [(ngModel)]="filtros.ubicacion">
+    <option value="">Todas</option>
+    <option *ngFor="let loc of ubicaciones" [value]="loc">{{ loc }}</option>
+  </select>
+
+  <label for="estado">Estado:</label>
+  <select id="estado" [(ngModel)]="filtros.estado">
+    <option value="">Todos</option>
+    <option value="activo">Activo</option>
+    <option value="inactivo">Inactivo</option>
+  </select>
+
+  <button (click)="aplicarFiltros()">Aplicar</button>
+</div>

@@ -1,0 +1,159 @@
+.contenedor{
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 7rem 1fr;
+
+
+}
+
+.cuadro{
+    background-color: rgba(75, 94, 123, 0.7);
+    border: 2px solid rgba(39,41,43,0.3);
+    border-radius: 1%;
+}
+
+
+.siderbar{
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.card1, .card2, .card3, .card4{
+    margin: 10px;
+    background-color: #181a1b;
+    color: white;
+}
+
+.mat-expansion-panel-body{
+    color: white;
+}
+mat-expansion-panel{
+    background-color: #181a1b;
+}
+mat-icon{
+    color: #181a1b;
+}
+span{
+    color: white;
+}
+
+mat-expansion-panel{
+    color: white;
+}
+.fotoPerfil{
+    margin-top: 10px;
+    margin-left: 20%;
+    width: 50%;
+    height: 110px;
+}
+
+.nombre{
+    margin-top: 10px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 16% 75%;
+}
+
+.no-filter-width {
+    width: 12vw;
+}
+
+.active-filter-width {
+    width: 20vw;
+}
+
+.active-filter-bg {
+    background-color: #ee8844 !important;
+}
+
+.active-filter-text {
+    color: white;
+}
+
+.text-truncate {
+    width: 9vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.panel{
+    margin-bottom: 10px;
+}
+
+.budget-range {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.budget-range mat-form-field {
+    width: 45%;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    background-color: white;
+}
+
+.background{
+    width: 100%;
+    height: 100%;
+    background: url('https://c.tenor.com/k2V7yl0m9I0AAAAC/cidade.gif');
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+//Filtro busqueda
+
+.filtro-container {
+  padding: 20px;
+
+  .search-box {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+
+    input {
+      width: 100%;
+      padding: 12px 45px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s;
+
+      &:focus {
+        border-color: #0066cc;
+        box-shadow: 0 0 0 2px rgba(0,102,204,0.2);
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+  }
+
+  .resultados-busqueda {
+    margin-top: 20px;
+    padding: 20px;
+
+    h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+  }
+}

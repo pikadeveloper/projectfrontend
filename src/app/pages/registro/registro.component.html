@@ -1,4 +1,4 @@
-<div class="background">
+<!-- <div class="landing-container">
     <form id="box-form" [formGroup]="usersForm">
         <h2>Formulario de registro</h2>
         <div class="mb-3">
@@ -34,4 +34,108 @@
           </div>
         <button class="login-btn" color="primary" mat-raised-button (click)="valid()">REGISTRAR</button>
     </form>
+</div> -->
+<div class="landing-container">
+  <form id="box-form" [formGroup]="usersForm">
+    <h2>Formulario de registro</h2>
+
+    <!-- Nombre -->
+    <div class="mb-3">
+      <label for="firstname" class="form-label">Nombre</label>
+      <input
+        id="firstname"
+        type="text"
+        class="form-control"
+        formControlName="firstname"
+        required
+      />
+      <div *ngIf="usersForm.get('firstname')?.invalid && usersForm.get('firstname')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('firstname')?.hasError('required')">El nombre es obligatorio.</small>
+        <small *ngIf="usersForm.get('firstname')?.hasError('minlength')">El nombre debe tener al menos 2 caracteres.</small>
+        <small *ngIf="usersForm.get('firstname')?.hasError('maxlength')">El nombre no puede exceder los 30 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Apellidos</label>
+      <input
+        id="lastname"
+        type="text"
+        class="form-control"
+        formControlName="lastname"
+      />
+      <div *ngIf="usersForm.get('lastname')?.invalid && usersForm.get('lastname')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('lastname')?.hasError('required')">Los apellidos son obligatorios.</small>
+        <small *ngIf="usersForm.get('lastname')?.hasError('minlength')">Los apellidos deben tener al menos 2 caracteres.</small>
+        <small *ngIf="usersForm.get('lastname')?.hasError('maxlength')">Los apellidos no pueden exceder los 60 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Correo -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Dirección de correo</label>
+      <input
+        id="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+      />
+      <div *ngIf="usersForm.get('email')?.invalid && usersForm.get('email')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('email')?.hasError('required')">El correo es obligatorio.</small>
+        <small *ngIf="usersForm.get('email')?.hasError('email')">Debe ser una dirección de correo válida.</small>
+        <small *ngIf="usersForm.get('email')?.hasError('maxlength')">El correo no puede exceder los 60 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        class="form-control"
+      />
+      <div *ngIf="usersForm.get('password')?.invalid && usersForm.get('password')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('password')?.hasError('required')">La contraseña es obligatoria.</small>
+        <small *ngIf="usersForm.get('password')?.hasError('minlength')">Debe tener al menos 8 caracteres.</small>
+        <small *ngIf="usersForm.get('password')?.hasError('maxlength')">La contraseña no puede exceder los 60 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="mb-3">
+      <label for="address1" class="form-label">Dirección</label>
+      <input
+        id="address1"
+        type="text"
+        class="form-control"
+        formControlName="address1"
+      />
+      <div *ngIf="usersForm.get('address1')?.invalid && usersForm.get('address1')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('address1')?.hasError('required')">La dirección es obligatoria.</small>
+        <small *ngIf="usersForm.get('address1')?.hasError('minlength')">La dirección debe tener al menos 2 caracteres.</small>
+        <small *ngIf="usersForm.get('address1')?.hasError('maxlength')">La dirección no puede exceder los 30 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Número de celular -->
+    <div class="mb-3">
+      <label for="cellphone" class="form-label">Número de celular</label>
+      <input
+        id="cellphone"
+        type="text"
+        class="form-control"
+        formControlName="cellphone"
+      />
+      <div *ngIf="usersForm.get('cellphone')?.invalid && usersForm.get('cellphone')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('cellphone')?.hasError('minlength')">El número debe tener 9 dígitos (ej: 912345678).</small>
+        <small *ngIf="usersForm.get('cellphone')?.hasError('maxlength')">El número debe tener 9 dígitos (ej: 912345678).</small>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <button class="login-btn" color="primary" mat-raised-button (click)="valid()">REGISTRAR</button>
+  </form>
 </div>

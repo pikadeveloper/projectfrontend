@@ -1,4 +1,5 @@
 export interface UserData {
+    isEmployer: boolean;
 }
 
 export interface LoginResponse{

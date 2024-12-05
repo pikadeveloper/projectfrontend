@@ -1,39 +1,32 @@
-import { Component,OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { PostService } from 'src/app/services/post.service';
 
 
 @Component({
   selector: 'app-filtro',
   templateUrl: './filtro.component.html',
-  styleUrl: './filtro.component.scss',
+  styleUrl: './filtro.component.scss'
 })
-export class FiltroComponent implements OnInit  {
-  filtroPanelOpenState = false;
-  budgetPanelOpenState = false;
 
-  region: string[] = ['Arica y Parinacota', 'Tarapacá', 'Antofagasta', 'Atacama', 'Coquimbo','Valparaíso','Metropolitana','O´Higgins','Maule','Ñuble','Biobío','Araucanía','Los Ríos','Los Lagos','Aysén', 'Magallanes'];
-  experiencia: string[] = ['1 años','2 años','3 años','4 años o más',]
-  disponibilidad: string[]= ['tiempo completo','tiempo parcial']
+export class FiltroComponent implements OnInit {
+  ofertas: any[] = [];
+  filtros: { categoria?: string, ubicacion?: string, estado?: string } = {};
 
-  minAmount: any;
-  maxAmount: any;
-  searchTerm: string = '';
+  constructor(private postService: PostService) {}
 
-  constructor(private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.cargarOfertas();
+  }
 
-  ngOnInit() {
-    // Obtener el término de búsqueda de los parámetros de la URL
-    this.route.queryParams.subscribe(params => {
-      this.searchTerm = params['search'] || '';
-      this.realizarBusqueda();
+  cargarOfertas(): void {
+    this.postService.getOfertas(this.filtros).subscribe((data) => {
+      this.ofertas = data;
     });
   }
 
-  realizarBusqueda() {
-    // Aquí implementarías la lógica de búsqueda/filtrado
-    console.log('Realizando búsqueda con término:', this.searchTerm);
+  onFiltrosAplicados(filtros: { categoria?: string, ubicacion?: string, estado?: string }): void {
+    this.filtros = filtros;
+    this.cargarOfertas();
   }
 
 }
