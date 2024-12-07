@@ -29,6 +29,14 @@ export class AppComponent {
     }
   }
 
+  public isInicio(){
+    if (this.router.url === '/inicio') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async salir() {
     await this.auth.logout();
     this.snackBar.open('Sesión cerrada correctamente', 'OK', {
