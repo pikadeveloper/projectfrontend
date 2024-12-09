@@ -1,40 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'FrontConectaIT';
   menuVisible = false;
+  loggedIn$: Observable<boolean>;
 
   constructor(private auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
-    if (auth.isLoggedIn()) {
-      auth.navigateHome()
+    this.loggedIn$ = this.auth.loggedIn$;
+  }
+
+  ngOnInit() {
+    // Si el usuario ya estaba logueado al cargar la app, puedes navegar
+    if (this.auth.isLoggedIn()) {
+      this.auth.navigateHome();
     }
   }
+
   navegar(url: string) {
     this.router.navigate([url]);
   }
 
-  public logueado(){
-    if (this.auth.isLoggedIn()) {
-      return true
-    } else {
-      return false
-    }
+  logueado(): boolean {
+    return this.auth.isLoggedIn();
   }
 
-  public isInicio(){
-    if (this.router.url === '/inicio') {
-      return true;
-    } else {
-      return false;
-    }
+  isInicio(): boolean {
+    return this.router.url === '/inicio';
   }
 
   async salir() {
@@ -47,5 +47,4 @@ export class AppComponent {
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
   }
-
 }

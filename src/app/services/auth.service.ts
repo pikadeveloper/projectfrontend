@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 import { LoginResponse, UserData } from '../interfaces/login';
@@ -17,6 +17,11 @@ export class AuthService {
 
   private _userData: UserData | null = null;
 
+  // BehaviorSubject para el estado de autenticación
+  // Inicializamos con el estado actual (true si hay datos del usuario, false en caso contrario)
+  private loggedInSubject = new BehaviorSubject<boolean>(this.hasUserData());
+  public loggedIn$ = this.loggedInSubject.asObservable();
+
   constructor(private http: HttpClient, public router: Router) {
     const encryptedData = localStorage.getItem('userData');
     if (encryptedData) {
@@ -31,14 +36,16 @@ export class AuthService {
   }
 
   private encryptData(data: any): string {
-    console.log(data);
-
     return CryptoJS.AES.encrypt(JSON.stringify(data), this.secretKey).toString();
   }
 
   private decryptData(encryptedData: string): any {
     const bytes = CryptoJS.AES.decrypt(encryptedData, this.secretKey);
     return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  }
+
+  private hasUserData(): boolean {
+    return !!localStorage.getItem('userData');
   }
 
   public signup = async (cuenta: any) => {
@@ -53,12 +60,18 @@ export class AuthService {
 
   public login = async (email: string, password: string) => {
     try {
-      const loginResponse = await lastValueFrom(this.http.post<LoginResponse>(`${this.api}login/`, { email, password }));
+      const loginResponse = await lastValueFrom(
+        this.http.post<LoginResponse>(`${this.api}login/`, { email, password })
+      );
 
       if (loginResponse) {
         this._userData = loginResponse.data;
         const encryptedData = this.encryptData(loginResponse);
         localStorage.setItem('userData', encryptedData);
+
+        // Emitir el nuevo estado de loggedInSubject
+        this.loggedInSubject.next(true);
+
         this.router.navigateByUrl('inicio');
         return { success: true, message: loginResponse.message };
       } else {
@@ -74,6 +87,8 @@ export class AuthService {
     this._userData = null;
     this.headers.delete('Authorization');
     localStorage.clear();
+    // Emitir el nuevo estado (no logueado)
+    this.loggedInSubject.next(false);
     this.router.navigateByUrl('inicio');
   };
 
@@ -86,21 +101,10 @@ export class AuthService {
   }
 
   public isLoggedIn = (): boolean => {
-    return !!this._userData;
+    return this._userData != null;
   };
 
   public isEmployer = (): boolean => {
     return !!this._userData?.isEmployer;
   };
 }
-
-  /*
-  public isSysAdmin = (): boolean => {
-    return this._userData?.type === "sysadmin"
-  }
-
-  public isAdmin = (): boolean => {
-    return this._userData?.type === "admin"
-  }
-  */
-

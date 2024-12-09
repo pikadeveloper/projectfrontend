@@ -1,39 +1,15 @@
-#tarjetas{
-    margin: 100px;
-    padding: 100px;
-    margin-top: 0px;
-    padding-top: .90rem;
-    padding-bottom: .90rem;
-    background-color: rgba(75, 94, 123, 0.7);
-    border: 2px solid rgba(39,41,43,0.3);
-    border-radius: 1%;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-}
-
-
-.container {
-    padding: 0px; /* Elimina el relleno interior del contenedor */
-}
 .landing-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-top: 30px;
-    //background-color: #d0e0eb;
-    background: url('https://www.iloveimg.com/img/bg/background.svg');
-    background-size: 100%;
-    background-repeat: repeat;
-    background-attachment: fixed;
-}
-
-.toolbar {
-  display: flex;
-  align-items: center;
-}
-
-.spacer {
-  flex: 1;
+  background: url('https://www.iloveimg.com/img/bg/background.svg');
+  background-size: 100%;
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 .hero-section {
@@ -49,70 +25,24 @@
 .hero-section h1 {
   font-size: 3rem;
   margin: 0.5rem 0;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .hero-section p {
   font-size: 1.2rem;
   margin: 1rem 0;
+  max-width: 600px;
+  line-height: 1.5;
 }
 
 .cta-button {
   margin-top: 1.5rem;
   padding: 0.75rem 2rem;
   font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
 }
-
-.features-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem; /* Espacio uniforme entre las tarjetas */
-  padding: 2rem;
-}
-
-.feature-card {
-  flex: 1 1 300px; /* Tamaño responsivo con un ancho mínimo */
-  max-width: 300px; /* Limitar el ancho máximo */
-  text-align: center;
-  padding: 1.5rem;
-  background: white; /* Fondo blanco */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px); /* Efecto de levitación */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-}
-
-.feature-card mat-icon {
-  font-size: 24px; /* Tamaño uniforme de los íconos */
-  color: #1976d2;
-  margin-bottom: 0.5rem; /* Espacio debajo del ícono */
-}
-.feature-card h2 {
-  margin: 1rem 0 0.5rem;
-  font-size: 1.25rem;
-}
-
-.feature-card p {
-  font-size: 0.9rem;
-  color: #555;
-}
-/* Ajuste del footer */
-.footer {
-  text-align: center;
-  padding: 1rem;
-  background: #f5f5f5;
-  margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo */
-}
-
-//Buscardor
 
 .search-container {
   width: 100%;
@@ -134,6 +64,7 @@
     font-size: 14px;
     outline: none;
     transition: all 0.3s;
+    font-family: 'Montserrat', sans-serif;
 
     &:focus {
       border-color: #0066cc;
@@ -153,3 +84,265 @@
     color: #666;
   }
 }
+
+.features-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+}
+
+.feature-card {
+  flex: 1 1 300px;
+  max-width: 300px;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  mat-icon {
+    zoom: 1.7;
+    color: #1976d2;
+    margin-bottom: 0.7rem;
+  }
+
+  h2 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  margin-top: auto;
+
+  p {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.4;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .features-section {
+    padding: 2rem 1rem;
+  }
+
+  .feature-card {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 3rem 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .hero-section p {
+    font-size: 0.95rem;
+  }
+
+  .search-box input {
+    font-size: 0.85rem;
+    padding: 10px 40px;
+  }
+}
+
+
+// #tarjetas{
+//     margin: 100px;
+//     padding: 100px;
+//     margin-top: 0px;
+//     padding-top: .90rem;
+//     padding-bottom: .90rem;
+//     background-color: rgba(75, 94, 123, 0.7);
+//     border: 2px solid rgba(39,41,43,0.3);
+//     border-radius: 1%;
+
+// }
+
+
+// .container {
+//     padding: 0px; /* Elimina el relleno interior del contenedor */
+// }
+// .landing-container {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+//   font-family: 'Roboto', sans-serif;
+//   padding-top: 30px;
+//     //background-color: #d0e0eb;
+//     background: url('https://www.iloveimg.com/img/bg/background.svg');
+//     background-size: 100%;
+//     background-repeat: repeat;
+//     background-attachment: fixed;
+// }
+
+// .toolbar {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .spacer {
+//   flex: 1;
+// }
+
+// .hero-section {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   text-align: center;
+//   background: linear-gradient(to right, #1976d2, #64b5f6);
+//   color: white;
+//   padding: 4rem 2rem;
+// }
+
+// .hero-section h1 {
+//   font-size: 3rem;
+//   margin: 0.5rem 0;
+// }
+
+// .hero-section p {
+//   font-size: 1.2rem;
+//   margin: 1rem 0;
+// }
+
+// .cta-button {
+//   margin-top: 1.5rem;
+//   padding: 0.75rem 2rem;
+//   font-size: 1rem;
+// }
+
+// .features-section {
+//   display: flex;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   gap: 1rem; /* Espacio uniforme entre las tarjetas */
+//   padding: 2rem;
+// }
+
+// .feature-card {
+//   flex: 1 1 300px; /* Tamaño responsivo con un ancho mínimo */
+//   max-width: 300px; /* Limitar el ancho máximo */
+//   text-align: center;
+//   padding: 1.5rem;
+//   background: white; /* Fondo blanco */
+//   border-radius: 8px; /* Bordes redondeados */
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+//   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: space-between;
+// }
+
+// .feature-card:hover {
+//   transform: translateY(-5px); /* Efecto de levitación */
+//   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+// }
+
+// .feature-card mat-icon {
+//   font-size: 24px; /* Tamaño uniforme de los íconos */
+//   color: #1976d2;
+//   margin-bottom: 0.5rem; /* Espacio debajo del ícono */
+// }
+// .feature-card h2 {
+//   margin: 1rem 0 0.5rem;
+//   font-size: 1.25rem;
+// }
+
+// .feature-card p {
+//   font-size: 0.9rem;
+//   color: #555;
+// }
+// /* Ajuste del footer */
+// .footer {
+//   text-align: center;
+//   padding: 1rem;
+//   background: #f5f5f5;
+//   margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo */
+// }
+
+// //Buscardor
+
+// .search-container {
+//   width: 100%;
+//   padding: 20px;
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .search-box {
+//   position: relative;
+//   width: 100%;
+//   max-width: 600px;
+
+//   input {
+//     width: 100%;
+//     padding: 12px 45px;
+//     border: 1px solid #ddd;
+//     border-radius: 25px;
+//     font-size: 14px;
+//     outline: none;
+//     transition: all 0.3s;
+
+//     &:focus {
+//       border-color: #0066cc;
+//       box-shadow: 0 0 0 2px rgba(0,102,204,0.2);
+//     }
+
+//     &::placeholder {
+//       color: #999;
+//     }
+//   }
+
+//   .search-icon {
+//     position: absolute;
+//     left: 15px;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     color: #666;
+//   }
+// }
