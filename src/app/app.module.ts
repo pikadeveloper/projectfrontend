@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { OfertaFilterComponent } from './pages/ofertafilter/ofertafilter.component';
 import { PostService } from './services/post.service';
+import { RegistroEmpleadorComponent } from './pages/registro-empleador/registro-empleador.component';
+import { RegistroEmpleadoresInicioComponent } from './pages/registro-empleadores-inicio/registro-empleadores-inicio.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { PostService } from './services/post.service';
     CrearOfertaComponent,
     RegistroComponent,
     CategoriaComponent,
-    OfertaFilterComponent
+    OfertaFilterComponent,
+    RegistroEmpleadorComponent,
+    RegistroEmpleadoresInicioComponent
+
   ],
   imports: [
     BrowserModule,
@@ -60,6 +66,7 @@ import { PostService } from './services/post.service';
     MatInputModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatMenuModule
   ],
   providers: [
     PostService

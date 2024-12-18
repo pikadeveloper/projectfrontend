@@ -1,0 +1,126 @@
+$primary-blue-light: #69bffb;   // Azul claro
+$primary-blue-lighter: #a8dbff; // Azul aún más claro
+$accent-pink: #ff82a1;          // Un rosa más suave que antes
+$text-color-dark: #333;
+$text-color-light: #fff;
+
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  color: $text-color-dark;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.text-section {
+  flex: 1;
+  margin-bottom: 2rem;
+
+  @media (min-width: 768px) {
+    margin-right: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .intro-text {
+    max-width: 500px;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: rgba($text-color-dark, 0.9); // Un poco más tenue
+  }
+
+  .action-btn {
+    background-color: $accent-pink !important;
+    color: $text-color-light !important;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+}
+
+.steps-section {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+
+  .step-card {
+    background: #24303c;
+    color: $text-color-light;
+    width: 250px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem 0.5rem;
+    flex: 1 1 auto;
+    max-width: 250px;
+
+    mat-card-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 0;
+
+      mat-icon {
+        font-size: 3rem;
+        color: $primary-blue-light;
+      }
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: $text-color-light;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #fff;
+      margin: 0;
+    }
+  }
+}
+.already-have-account {
+  background: #f5f5f5;
+  padding: 2rem;
+  text-align: center;
+
+  .already-inner {
+    max-width: 600px;
+    margin: 0 auto;
+
+    p {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+  }
+}

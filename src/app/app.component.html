@@ -4,13 +4,25 @@
       <mat-icon>menu</mat-icon>
     </button>
     <img class="logo-inicio" src="assets/img/logo.png" (click)="navegar('inicio')" alt="logo" width="50px">
-    <span class="title-inicio" (click)="navegar('inicio')">ConectaTalentoIT</span>
+    <span class="title-inicio" (click)="navegar('')">ConectaTalentoIT</span>
   </div>
 
   <div class="nav-items" [class.show-menu]="menuVisible">
     <!-- Botones visibles solo si NO está logueado -->
     <button mat-raised-button *ngIf="!(loggedIn$ | async)" color="primary" (click)="navegar('login')">Iniciar Sesión</button>
-    <button mat-raised-button *ngIf="!(loggedIn$ | async)" (click)="navegar('registro')">Registrarse</button>
+    <!-- <button mat-raised-button *ngIf="!(loggedIn$ | async)" (click)="navegar('registro')">Registrarse</button> -->
+     <!-- Botón 'Regístrate' con menú -->
+    <button mat-raised-button [matMenuTriggerFor]="registrateMenu" *ngIf="!(loggedIn$ | async)">Regístrate <mat-icon>arrow_drop_down</mat-icon></button>
+    <mat-menu #registrateMenu="matMenu">
+      <button mat-menu-item (click)="navegar('registro-empleadores-inicio')">
+        <mat-icon>insert_drive_file</mat-icon>
+        Empleadores
+      </button>
+      <button mat-menu-item (click)="navegar('registro')">
+        <mat-icon>person_add</mat-icon>
+        Profesionales
+      </button>
+    </mat-menu>
 
     <!-- Botones visibles solo si está logueado -->
     <button mat-raised-button *ngIf="loggedIn$ | async" (click)="navegar('perfil')">Perfil</button>

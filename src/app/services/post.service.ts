@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class PostService {
-  private apiUrl = `${environment.API}/ofertas`;
+  private apiUrl = `${environment.API}ofertas`;
 
   constructor(private http: HttpClient) { }
 

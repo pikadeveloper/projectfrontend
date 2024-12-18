@@ -1,6 +1,6 @@
 <div class="landing-container">
   <form id="box-form" [formGroup]="usersForm">
-    <h2>Formulario de registro</h2>
+    <h2>Formulario de Registro para Empleadores</h2>
 
     <!-- Nombre -->
     <div class="mb-3">
@@ -67,9 +67,9 @@
       </div>
     </div>
 
-    <!-- Dirección -->
+    <!-- Dirección Comercial -->
     <div class="mb-3">
-      <label for="address1" class="form-label">Dirección</label>
+      <label for="address1" class="form-label">Dirección Comercial</label>
       <input
         id="address1"
         type="text"
@@ -80,6 +80,21 @@
         <small *ngIf="usersForm.get('address1')?.hasError('required')">La dirección es obligatoria.</small>
         <small *ngIf="usersForm.get('address1')?.hasError('minlength')">La dirección debe tener al menos 2 caracteres.</small>
         <small *ngIf="usersForm.get('address1')?.hasError('maxlength')">La dirección no puede exceder los 30 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Dirección 2 (opcional) -->
+    <div class="mb-3">
+      <label for="address2" class="form-label">Dirección (opcional)</label>
+      <input
+        id="address2"
+        type="text"
+        class="form-control"
+        formControlName="address2"
+      />
+      <div *ngIf="usersForm.get('address2')?.invalid && usersForm.get('address2')?.touched" class="text-danger">
+        <small *ngIf="usersForm.get('address2')?.hasError('minlength')">La dirección debe tener al menos 2 caracteres.</small>
+        <small *ngIf="usersForm.get('address2')?.hasError('maxlength')">La dirección no puede exceder los 60 caracteres.</small>
       </div>
     </div>
 
@@ -97,6 +112,9 @@
         <small *ngIf="usersForm.get('cellphone')?.hasError('maxlength')">El número debe tener 9 dígitos (ej: 912345678).</small>
       </div>
     </div>
+
+    <!-- Campo oculto para indicar que es empleador -->
+    <input type="hidden" formControlName="is_employer" value="true" />
 
     <!-- Botón -->
     <button class="login-btn" color="primary" mat-raised-button (click)="valid()">REGISTRAR</button>
