@@ -10,6 +10,7 @@ import { CrearOfertaComponent } from './pages/crear-oferta/crear-oferta.componen
 import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { RegistroEmpleadorComponent } from './pages/registro-empleador/registro-empleador.component';
 import { RegistroEmpleadoresInicioComponent } from './pages/registro-empleadores-inicio/registro-empleadores-inicio.component';
+import { RegistroEmpresaComponent } from './pages/registro-empresa/registro-empresa.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'categoria', component: CategoriaComponent },
   { path: 'registro-empleador', component: RegistroEmpleadorComponent },
   { path: 'registro-empleadores-inicio', component: RegistroEmpleadoresInicioComponent },
+  { path: 'registro-empresa', component: RegistroEmpresaComponent },
 ];
 
 @NgModule({

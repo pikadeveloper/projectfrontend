@@ -31,6 +31,7 @@ import { OfertaFilterComponent } from './pages/ofertafilter/ofertafilter.compone
 import { PostService } from './services/post.service';
 import { RegistroEmpleadorComponent } from './pages/registro-empleador/registro-empleador.component';
 import { RegistroEmpleadoresInicioComponent } from './pages/registro-empleadores-inicio/registro-empleadores-inicio.component';
+import { RegistroEmpresaComponent } from './pages/registro-empresa/registro-empresa.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { RegistroEmpleadoresInicioComponent } from './pages/registro-empleadores
     CategoriaComponent,
     OfertaFilterComponent,
     RegistroEmpleadorComponent,
-    RegistroEmpleadoresInicioComponent
+    RegistroEmpleadoresInicioComponent,
+    RegistroEmpresaComponent
 
   ],
   imports: [

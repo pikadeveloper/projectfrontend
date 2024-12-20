@@ -20,6 +20,15 @@ export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(this.hasUserData());
   public loggedIn$ = this.loggedInSubject.asObservable();
 
+    // Estado de si es empleador
+    private isEmployerSubject = new BehaviorSubject<boolean>(this.isEmployer());
+    public isEmployer$ = this.isEmployerSubject.asObservable();
+
+    // Estado de si ya tiene empresa
+    private hasEmpresaSubject = new BehaviorSubject<boolean>(this.hasEmpresa());
+    public hasEmpresa$ = this.hasEmpresaSubject.asObservable();
+
+
   constructor(private http: HttpClient, private router: Router) {
     const encryptedData = localStorage.getItem('userData');
     if (encryptedData) {
@@ -49,9 +58,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // Registro para usuarios normales (ya existente)
+  public isEmployer(): boolean {
+    return !!this._userData?.is_employer;
+  }
+
+  public hasEmpresa(): boolean {
+    // Por ejemplo, si guardas en localStorage este valor tras crear una empresa
+    return localStorage.getItem('hasEmpresa') === 'true';
+  }
+
+
   public async signup(cuenta: any) {
-    // Endpoint original para registrar usuarios normales
     try {
       const response = await lastValueFrom(this.http.post<AuthResData>(`${this.api}signup/`, cuenta));
       return response;
@@ -61,16 +78,58 @@ export class AuthService {
     }
   }
 
-  // NUEVO: Registro para empleadores
   public async registerEmployer(cuenta: any) {
-    // Asegúrate que "cuenta" incluya is_employer: true
-    // ej: cuenta = { email:..., password:..., firstname:..., is_employer: true }
     try {
       const response = await lastValueFrom(this.http.post<AuthResData>(`${this.api}register/employer/`, cuenta));
+      if (response && response.success) {
+        // Si el registro es exitoso, actualizas userData si es necesario
+        // y luego emites el cambio en isEmployer
+        if (response.is_employer) {
+          this._userData = {
+            username: response.username || null,
+            user_id: response.user_id,
+            email: response.email,
+            firstname: response.firstname,
+            date_joined: response.date_joined,
+            last_join: response.last_join,
+            is_employer: response.is_employer,
+            has_empresa: false  // valor inicial para nuevo empleador
+          };
+          this.isEmployerSubject.next(true);
+        }
+      }
       return response;
     } catch (error: any) {
       console.error('Error registrando empleador:', error);
-      return { message: 'Ocurrió un error al registrar el empleador. Por favor, inténtalo de nuevo más tarde.' };
+      return { success: false, message: 'Ocurrió un error al registrar el empleador. Por favor, inténtalo de nuevo más tarde.' };
+    }
+  }
+
+  // NUEVO: Crear empresa (solo para empleadores logueados)
+  // Cuando se crea la empresa, actualizamos el estado de hasEmpresa
+  public async createEmpresa(empresaData: any) {
+    const token = this.getToken();
+    if (!token) {
+      return { success: false, message: 'No hay token de autenticación.' };
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    });
+
+    try {
+      const response = await lastValueFrom(this.http.post(`${this.api}empresa/`, empresaData, { headers }));
+
+      // Suponemos que si la respuesta es exitosa, ya tenemos empresa
+      // Guardar un indicador en localStorage
+      localStorage.setItem('hasEmpresa', 'true');
+      this.hasEmpresaSubject.next(true);
+
+      return { success: true, data: response };
+    } catch (error: any) {
+      console.error('Error al crear la empresa:', error);
+      return { success: false, message: 'Ocurrió un error al crear la empresa.' };
     }
   }
 
@@ -84,7 +143,6 @@ export class AuthService {
       if (loginResponse) {
         const token = loginResponse.token;
 
-        // Crear objeto UserData a partir de loginResponse directamente
         const userData: UserData = {
           email: loginResponse.email,
           firstname: loginResponse.firstname,
@@ -92,19 +150,30 @@ export class AuthService {
           user_id: loginResponse.user_id,
           date_joined: loginResponse.date_joined,
           last_join: loginResponse.last_join,
-          is_employer: loginResponse.is_employer
+          is_employer: loginResponse.is_employer,
+          has_empresa: loginResponse.has_empresa
         };
 
         // Encriptar y guardar userData
         const encryptedData = this.encryptData(userData);
         localStorage.setItem('userData', encryptedData);
-
-        // Guardar token
         localStorage.setItem('token', token);
 
         this._userData = userData;
         this.loggedInSubject.next(true);
+        this.isEmployerSubject.next(this.isEmployer());
+        // Si ya tienes el estado de la empresa guardado, podrías chequearlo:
+        this.hasEmpresaSubject.next(this.hasEmpresa());
+        if (this.isEmployerSubject.value === true) {
+          if (loginResponse.has_empresa) {
+            localStorage.setItem('hasEmpresa', 'true');
+          } else {
+            localStorage.removeItem('hasEmpresa');
+          }
+          this.hasEmpresaSubject.next(this.hasEmpresa());
+        } else {
 
+        }
         this.router.navigateByUrl('inicio');
         // Devolver un mensaje fijo, ya que la respuesta no trae "message"
         return { success: true, message: 'Inicio de sesión exitoso' };
@@ -138,138 +207,5 @@ export class AuthService {
     return this._userData != null;
   }
 
-  public isEmployer(): boolean {
-    return !!this._userData?.is_employer;
-  }
 
-  // NUEVO: Crear empresa (solo para empleadores logueados)
-  public async createEmpresa(empresaData: any) {
-    const token = this.getToken();
-    if (!token) {
-      return { success: false, message: 'No hay token de autenticación.' };
-    }
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${token}`
-    });
-
-    try {
-      const response = await lastValueFrom(this.http.post(`${this.api}empresa/`, empresaData, { headers }));
-      return { success: true, data: response };
-    } catch (error: any) {
-      console.error('Error al crear la empresa:', error);
-      return { success: false, message: 'Ocurrió un error al crear la empresa.' };
-    }
-  }
 }
-// import { Injectable } from '@angular/core';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { environment } from '../environments/environment';
-// import { lastValueFrom, BehaviorSubject } from 'rxjs';
-// import { Router } from '@angular/router';
-// import * as CryptoJS from 'crypto-js';
-// import { LoginResponse, UserData } from '../interfaces/login';
-// import { AuthResData } from '../models/auth.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-//   private headers: HttpHeaders = new HttpHeaders();
-//   private api = environment.API;
-//   private secretKey = environment.SECRET_KEY;
-
-//   private _userData: UserData | null = null;
-
-//   // BehaviorSubject para el estado de autenticación
-//   // Inicializamos con el estado actual (true si hay datos del usuario, false en caso contrario)
-//   private loggedInSubject = new BehaviorSubject<boolean>(this.hasUserData());
-//   public loggedIn$ = this.loggedInSubject.asObservable();
-
-//   constructor(private http: HttpClient, public router: Router) {
-//     const encryptedData = localStorage.getItem('userData');
-//     if (encryptedData) {
-//       try {
-//         this._userData = this.decryptData(encryptedData);
-//       } catch (e) {
-//         console.error('Error al descifrar los datos del usuario:', e);
-//         localStorage.removeItem('userData');
-//       }
-//     }
-//     this.headers.set('Content-Type', 'application/json');
-//   }
-
-//   private encryptData(data: any): string {
-//     return CryptoJS.AES.encrypt(JSON.stringify(data), this.secretKey).toString();
-//   }
-
-//   private decryptData(encryptedData: string): any {
-//     const bytes = CryptoJS.AES.decrypt(encryptedData, this.secretKey);
-//     return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-//   }
-
-//   private hasUserData(): boolean {
-//     return !!localStorage.getItem('userData');
-//   }
-
-//   public signup = async (cuenta: any) => {
-//     try {
-//       const response = await lastValueFrom(this.http.post<AuthResData>(`${this.api}signup/`, cuenta));
-//       return response;
-//     } catch (error: any) {
-//       console.error('Error del servidor:', error);
-//       return { message: 'Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.' };
-//     }
-//   };
-
-//   public login = async (email: string, password: string) => {
-//     try {
-//       const loginResponse = await lastValueFrom(
-//         this.http.post<LoginResponse>(`${this.api}login/`, { email, password })
-//       );
-
-//       if (loginResponse) {
-//         this._userData = loginResponse.data;
-//         const encryptedData = this.encryptData(loginResponse);
-//         localStorage.setItem('userData', encryptedData);
-
-//         // Emitir el nuevo estado de loggedInSubject
-//         this.loggedInSubject.next(true);
-
-//         this.router.navigateByUrl('inicio');
-//         return { success: true, message: loginResponse.message };
-//       } else {
-//         return { success: false, message: 'Respuesta inválida del servidor' };
-//       }
-//     } catch (error: any) {
-//       const errorMessage = error.error?.message || 'Usuario o contraseña incorrectos.';
-//       return { success: false, message: errorMessage };
-//     }
-//   };
-
-//   public logout = async () => {
-//     this._userData = null;
-//     this.headers.delete('Authorization');
-//     localStorage.clear();
-//     // Emitir el nuevo estado (no logueado)
-//     this.loggedInSubject.next(false);
-//     this.router.navigateByUrl('inicio');
-//   };
-
-//   public navigateHome = async () => {
-//     this.router.navigateByUrl('/inicio')
-//   }
-
-//   public get userData(): UserData | null {
-//     return this._userData;
-//   }
-
-//   public isLoggedIn = (): boolean => {
-//     return this._userData != null;
-//   };
-
-//   public isEmployer = (): boolean => {
-//     return !!this._userData?.isEmployer;
-//   };
-// }

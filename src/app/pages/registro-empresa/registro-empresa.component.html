@@ -1,1 +1,116 @@
-<p>registro-empresa works!</p>
+<div class="registro-empresa-container">
+  <div class="registro-card">
+    <h2>Registro de Empresa</h2>
+    <form [formGroup]="empresaForm">
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre de la Empresa</label>
+        <input id="nombre" type="text" formControlName="nombre"/>
+        <div class="error-messages" *ngIf="empresaForm.get('nombre')?.invalid && empresaForm.get('nombre')?.touched">
+          <small *ngIf="empresaForm.get('nombre')?.hasError('required')">Este campo es obligatorio.</small>
+          <small *ngIf="empresaForm.get('nombre')?.hasError('minlength')">Mínimo 2 caracteres.</small>
+          <small *ngIf="empresaForm.get('nombre')?.hasError('maxlength')">Máximo 255 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Razón Social -->
+      <div class="form-group">
+        <label for="razon_social">Razón Social</label>
+        <input id="razon_social" type="text" formControlName="razon_social"/>
+        <div class="error-messages" *ngIf="empresaForm.get('razon_social')?.invalid && empresaForm.get('razon_social')?.touched">
+          <small *ngIf="empresaForm.get('razon_social')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('razon_social')?.hasError('minlength')">Mínimo 2 caracteres.</small>
+          <small *ngIf="empresaForm.get('razon_social')?.hasError('maxlength')">Máximo 255 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- RUT -->
+      <div class="form-group">
+        <label for="rut">RUT</label>
+        <input id="rut" type="text" formControlName="rut"/>
+        <div class="error-messages" *ngIf="empresaForm.get('rut')?.invalid && empresaForm.get('rut')?.touched">
+          <small *ngIf="empresaForm.get('rut')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('rut')?.hasError('minlength')">Mínimo 9 caracteres.</small>
+          <small *ngIf="empresaForm.get('rut')?.hasError('maxlength')">Máximo 20 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Giro -->
+      <div class="form-group">
+        <label for="giro">Giro</label>
+        <input id="giro" type="text" formControlName="giro"/>
+        <div class="error-messages" *ngIf="empresaForm.get('giro')?.invalid && empresaForm.get('giro')?.touched">
+          <small *ngIf="empresaForm.get('giro')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('giro')?.hasError('minlength')">Mínimo 2 caracteres.</small>
+          <small *ngIf="empresaForm.get('giro')?.hasError('maxlength')">Máximo 255 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Dirección Comercial -->
+      <div class="form-group">
+        <label for="direccion_comercial">Dirección Comercial</label>
+        <input id="direccion_comercial" type="text" formControlName="direccion_comercial"/>
+        <div class="error-messages" *ngIf="empresaForm.get('direccion_comercial')?.invalid && empresaForm.get('direccion_comercial')?.touched">
+          <small *ngIf="empresaForm.get('direccion_comercial')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('direccion_comercial')?.hasError('minlength')">Mínimo 2 caracteres.</small>
+          <small *ngIf="empresaForm.get('direccion_comercial')?.hasError('maxlength')">Máximo 255 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Email de Contacto -->
+      <div class="form-group">
+        <label for="email_contacto">Email de Contacto</label>
+        <input id="email_contacto" type="email" formControlName="email_contacto"/>
+        <div class="error-messages" *ngIf="empresaForm.get('email_contacto')?.invalid && empresaForm.get('email_contacto')?.touched">
+          <small *ngIf="empresaForm.get('email_contacto')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('email_contacto')?.hasError('email')">Debe ser un email válido.</small>
+          <small *ngIf="empresaForm.get('email_contacto')?.hasError('maxlength')">Máximo 60 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" type="text" formControlName="telefono"/>
+        <div class="error-messages" *ngIf="empresaForm.get('telefono')?.invalid && empresaForm.get('telefono')?.touched">
+          <small *ngIf="empresaForm.get('telefono')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('telefono')?.hasError('minlength')">Mínimo 7 caracteres.</small>
+          <small *ngIf="empresaForm.get('telefono')?.hasError('maxlength')">Máximo 20 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Sitio Web (opcional) -->
+      <div class="form-group">
+        <label for="sitio_web">Sitio Web (opcional)</label>
+        <input id="sitio_web" type="text" formControlName="sitio_web"/>
+        <div class="error-messages" *ngIf="empresaForm.get('sitio_web')?.invalid && empresaForm.get('sitio_web')?.touched">
+          <small *ngIf="empresaForm.get('sitio_web')?.hasError('maxlength')">Máximo 200 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Descripción (opcional) -->
+      <div class="form-group">
+        <label for="descripcion">Descripción (opcional)</label>
+        <input id="descripcion" type="text" formControlName="descripcion"/>
+        <div class="error-messages" *ngIf="empresaForm.get('descripcion')?.invalid && empresaForm.get('descripcion')?.touched">
+          <small *ngIf="empresaForm.get('descripcion')?.hasError('maxlength')">Máximo 500 caracteres.</small>
+        </div>
+      </div>
+
+      <!-- Ubicación -->
+      <div class="form-group">
+        <label for="ubicacion">Ubicación</label>
+        <input id="ubicacion" type="text" formControlName="ubicacion"/>
+        <div class="error-messages" *ngIf="empresaForm.get('ubicacion')?.invalid && empresaForm.get('ubicacion')?.touched">
+          <small *ngIf="empresaForm.get('ubicacion')?.hasError('required')">Campo obligatorio.</small>
+          <small *ngIf="empresaForm.get('ubicacion')?.hasError('minlength')">Mínimo 2 caracteres.</small>
+          <small *ngIf="empresaForm.get('ubicacion')?.hasError('maxlength')">Máximo 255 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="submit-btn" (click)="registrarEmpresa()">Registrar Empresa</button>
+      </div>
+    </form>
+  </div>
+</div>

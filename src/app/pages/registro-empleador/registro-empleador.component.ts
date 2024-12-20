@@ -43,8 +43,7 @@ export class RegistroEmpleadorComponent {
             this.router.navigate(['/inicio']);
           }, 1000);
         } else if (response && 'message' in response) {
-          // Si hay un mensaje de error del servidor, mostrarlo
-          this.snackBar.open(response.message, 'OK', {
+          this.snackBar.open(response.message || 'Error desconocido', 'OK', {
             duration: 3000,
           });
         } else {

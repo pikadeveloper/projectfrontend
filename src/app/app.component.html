@@ -26,7 +26,8 @@
 
     <!-- Botones visibles solo si está logueado -->
     <button mat-raised-button *ngIf="loggedIn$ | async" (click)="navegar('perfil')">Perfil</button>
-    <button mat-raised-button *ngIf="loggedIn$ | async" (click)="navegar('crear')">Crear Oferta</button>
+    <button mat-raised-button *ngIf="(isEmployer$ | async) && !(hasEmpresa$ | async)" (click)="navegar('registro-empresa')">Registrar Empresa</button>
+    <button mat-raised-button *ngIf="hasEmpresa$ | async" (click)="navegar('crear')">Crear Oferta</button>
     <button mat-raised-button *ngIf="loggedIn$ | async" color="warn" (click)="salir()">Cerrar Sesión</button>
   </div>
 </mat-toolbar>

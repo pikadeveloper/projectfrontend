@@ -10,6 +10,9 @@ $text-color-light: #fff;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  @media screen and (max-width: 768px){
+    padding-top: 100px;
+  }
 }
 
 .content-wrapper {
@@ -89,7 +92,9 @@ $text-color-light: #fff;
       padding: 0.5rem 0;
 
       mat-icon {
-        font-size: 3rem;
+        zoom: 1.7;
+        //color: #1976d2;
+        margin-bottom: 0.1rem;
         color: $primary-blue-light;
       }
     }

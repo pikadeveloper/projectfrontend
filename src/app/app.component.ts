@@ -13,9 +13,14 @@ export class AppComponent implements OnInit {
   title = 'FrontConectaIT';
   menuVisible = false;
   loggedIn$: Observable<boolean>;
+  isEmployer$: Observable<boolean>;
+  hasEmpresa$: Observable<boolean>;
 
   constructor(private auth: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.loggedIn$ = this.auth.loggedIn$;
+    this.isEmployer$ = this.auth.isEmployer$;
+    this.hasEmpresa$ = this.auth.hasEmpresa$;
+
   }
 
   ngOnInit() {

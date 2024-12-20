@@ -1,0 +1,91 @@
+// Ajusta estos valores a tus necesidades
+$dark-bg: #2a2f38;
+$input-bg: #ffffff;
+$input-text: #333;
+$text-light: #ffffff;
+$button-bg: #3399ff;
+$error-color: #ff5a5a;
+
+.registro-empleadores-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Para que la tarjeta comience arriba y no al centro vertical
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 5rem 1rem 2rem; // Agregamos padding-top extra (5rem) para separar del navbar si es fijo
+
+  // En pantallas pequeñas, el 1rem de padding lateral asegura que el contenido no se pegue a los bordes
+}
+
+.registro-card {
+  background: $dark-bg;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px; // Limita el ancho máximo incluso en pantallas grandes
+
+  h2 {
+    color: $text-light;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: $text-light;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      background: $input-bg;
+      color: $input-text;
+      font-size: 0.95rem;
+      outline: none;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+      }
+    }
+
+    .error-messages {
+      margin-top: 0.5rem;
+      small {
+        display: block;
+        color: $error-color;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+
+    .submit-btn {
+      background: $button-bg;
+      color: $text-light;
+      border: none;
+      border-radius: 4px;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: darken($button-bg, 10%);
+      }
+    }
+  }
+}
