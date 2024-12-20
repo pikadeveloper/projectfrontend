@@ -39,6 +39,8 @@ export class AuthService {
         localStorage.removeItem('userData');
       }
     }
+    this.isEmployerSubject.next(this.isEmployer());
+    this.hasEmpresaSubject.next(this.hasEmpresa());
   }
 
   private encryptData(data: any): string {
@@ -96,6 +98,7 @@ export class AuthService {
             has_empresa: false  // valor inicial para nuevo empleador
           };
           this.isEmployerSubject.next(true);
+          this.hasEmpresaSubject.next(false);
         }
       }
       return response;
@@ -119,7 +122,7 @@ export class AuthService {
     });
 
     try {
-      const response = await lastValueFrom(this.http.post(`${this.api}empresa/`, empresaData, { headers }));
+      const response = await lastValueFrom(this.http.post(`${environment.API}empresa/`, empresaData, { headers }));
 
       // Suponemos que si la respuesta es exitosa, ya tenemos empresa
       // Guardar un indicador en localStorage
@@ -158,6 +161,17 @@ export class AuthService {
         const encryptedData = this.encryptData(userData);
         localStorage.setItem('userData', encryptedData);
         localStorage.setItem('token', token);
+
+
+        if (loginResponse.is_employer) {
+          if (loginResponse.has_empresa) {
+            localStorage.setItem('hasEmpresa', 'true');
+          } else {
+            localStorage.removeItem('hasEmpresa');
+          }
+        } else {
+          localStorage.removeItem('hasEmpresa');
+        }
 
         this._userData = userData;
         this.loggedInSubject.next(true);
