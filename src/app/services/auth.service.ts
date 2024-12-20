@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { lastValueFrom, BehaviorSubject } from 'rxjs';
+import { lastValueFrom, BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 import { LoginResponse, UserData } from '../interfaces/login';
@@ -69,16 +69,20 @@ export class AuthService {
     return localStorage.getItem('hasEmpresa') === 'true';
   }
 
-
-  public async signup(cuenta: any) {
-    try {
-      const response = await lastValueFrom(this.http.post<AuthResData>(`${this.api}signup/`, cuenta));
-      return response;
-    } catch (error: any) {
-      console.error('Error del servidor:', error);
-      return { message: 'Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.' };
-    }
+  signup(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.api}signup/`, userData);
   }
+  // public async signup(cuenta: any):Promise<Observable<any>> {
+  //   return new Observable(observer => {
+  //     this.http.post<AuthResData>(`${this.api}signup/`, cuenta).subscribe({
+  //       next: response => observer.next(response),
+  //       error: error => {
+  //         console.error('Error del servidor:', error);
+  //         observer.next({ message: 'Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.' });
+  //       }
+  //     });
+  //   });
+  // }
 
   public async registerEmployer(cuenta: any) {
     try {

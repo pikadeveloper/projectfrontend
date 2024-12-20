@@ -4,6 +4,7 @@ import { AbstractControl, FormControl, FormGroup, FormsModule, ValidationErrors,
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -31,41 +32,44 @@ export class RegistroEmpleadorComponent {
   public valid = async () => {
     if (this.usersForm.valid) {
       try {
-        const response = await this.authService.signup(this.usersForm.getRawValue());
+        const response = await (await this.authService.signup(this.usersForm.getRawValue())).toPromise();
 
-        // Verificar si la respuesta es exitosa
-        if (response && 'success') {
+        if (response?.success) {
           this.snackBar.open('USUARIO REGISTRADO CORRECTAMENTE', 'OK', {
             duration: 3000,
           });
-          // Redirigir después de 3 segundos
           setTimeout(() => {
             this.router.navigate(['/inicio']);
           }, 1000);
-        } else if (response && 'message' in response) {
-          this.snackBar.open(response.message || 'Error desconocido', 'OK', {
-            duration: 3000,
-          });
         } else {
-          // Mensaje genérico si no se identifica el problema
-          this.snackBar.open('HUBO UN ERROR INESPERADO. INTENTE NUEVAMENTE.', 'OK', {
+          this.snackBar.open(response?.message, 'OK', {
             duration: 3000,
           });
         }
       } catch (error) {
-        console.error('Error en el registro:', error);
-        // Mostrar un mensaje de error en caso de fallo de red u otro problema
-        this.snackBar.open('HUBO UN ERROR DE CONEXIÓN. INTENTE NUEVAMENTE.', 'OK', {
-          duration: 3000,
-        });
-      }
-    } else {
-      this.snackBar.open('POR FAVOR INGRESE LOS DATOS CORRECTAMENTE', 'OK', {
-        duration: 3000,
-      });
-    }
+        if (error instanceof HttpErrorResponse) {
+          // Es un error HTTP, puedes manejarlo aquí
+          console.error('Error HTTP:', error);
+          if (error.status === 0) {
+            this.snackBar.open('No se pudo conectar al servidor. Verifique su conexión.', 'OK', {
+              duration: 3000,
+            });
+          } else if (error.error?.message) {
+            this.snackBar.open(error.error.message, 'OK', {
+              duration: 3000,
+            });
+          } else {
+            this.snackBar.open('Hubo un error inesperado. Intente nuevamente.', 'OK', {
+              duration: 3000,
+            });
+          }
+        } else {
+          // Es otro tipo de error
+          console.error('Error desconocido:', error);
+          this.snackBar.open('Ocurrió un error inesperado.', 'OK', { duration: 3000 });
+        }
   };
-}
 
-
-
+  }
+  }
+};
